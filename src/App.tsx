@@ -8,8 +8,7 @@ const user1 = {
   name: 'John Doe',
   email: 'john.doe@example.com',
   role: 'Software Engineer',
-  //  avatarUrl: 'https://example.com/avatar.jpg'
-  avatarUrl: 'https://i.pravatar.cc/300'
+  avatarUrl: 'https://gravatar.com/avatar/27205e5c51cb03f862138b22bcb5dc20f94a342e744ff6df1b8dc8af3c865109.jpg'
 
 };
 
@@ -20,10 +19,10 @@ export default function App() {
     name: 'Wireless Headphones',
     price: 199.99,
     description: 'High-quality wireless headphones with noise cancellation.',
-    imageUrl: 'https://example.com/headphones.jpg',
+    imageUrl: 'https://as1.ftcdn.net/jpg/00/44/36/76/1000_F_44367633_ef7Li8XTt3HDSJ3d2WEooPf3UAhvpKXK.jpg',
+   
     inStock: true
   };
-
 
   return (
 
@@ -63,6 +62,10 @@ export default function App() {
       >
         <div className="text-sm text-gray-500">
           Free shipping available
+        </div>
+
+        <div className="text-sm text-gray-500">
+          Last login: 2 hours ago
         </div>
       </ProductDisplay>
 
