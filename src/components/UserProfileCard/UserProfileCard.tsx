@@ -8,7 +8,6 @@ export default function UserProfileCard(props: UserProfileCardProps) {
                 src={props.user.avatarUrl}
                 alt={props.user.name} />
 
-
             <div className="user-data">
                 <h2> {props.user.name}</h2>
 
@@ -23,14 +22,13 @@ export default function UserProfileCard(props: UserProfileCardProps) {
 
                 {props.children}
 
-
                 {/* Edit button and add className="edit-button" */}
                 {props.onEdit && (
                     <button
                         className="edit-button"
                         onClick={() => props.onEdit?.(props.user.id)}
                     >
-                        Edit
+                        Edit Profile
                     </button>
                 )}
 

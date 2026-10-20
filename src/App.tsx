@@ -1,5 +1,6 @@
 import AlertBox from './components/AlertBox/AlertBox';
 import UserProfileCard from './components/UserProfileCard/UserProfileCard';
+import ProductDisplay from './components/ProductDisplay/ProductDisplay';
 import "./App.css"
 
 const user1 = {
@@ -14,12 +15,22 @@ const user1 = {
 
 export default function App() {
 
+  const product = {
+    id: '1',
+    name: 'Wireless Headphones',
+    price: 199.99,
+    description: 'High-quality wireless headphones with noise cancellation.',
+    imageUrl: 'https://example.com/headphones.jpg',
+    inStock: true
+  };
+
+
   return (
 
     <div>
       <h1> Alerts:</h1>
       <AlertBox type="success"
-        message="Your profile has been update sucessfully!"
+        message="Your profile has been updated successfully!"
         onClose={() => alert("Alert closed")} >
         <p className="text-sm">You can now continue using the application.</p>
       </AlertBox>
@@ -40,6 +51,20 @@ export default function App() {
         </div>
         <p>Welcome to your profile!</p>
       </UserProfileCard>
+
+
+      <ProductDisplay
+        product={product}
+        showDescription={true}
+        showStockStatus={true}
+        onAddToCart={(productId) =>
+          alert(`Added product ${productId} to cart`)
+        }
+      >
+        <div className="text-sm text-gray-500">
+          Free shipping available
+        </div>
+      </ProductDisplay>
 
     </div>
 
