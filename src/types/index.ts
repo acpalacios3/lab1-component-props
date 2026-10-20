@@ -27,7 +27,6 @@ export interface UserProfileCardProps {
   children?: React.ReactNode;
 }
 
-
 // 3.  ProductDisplay
 
 export interface Product {

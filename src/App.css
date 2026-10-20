@@ -2,7 +2,6 @@
 margin-bottom:  12px; ;
 }
 
-
 .alert-error {
   background-color: #f8d7da;
   color: #721c24;
@@ -30,6 +29,20 @@ margin-bottom:  12px; ;
   padding: 12px ;
   border-radius: 6px;
   cursor: pointer;
+}
+
+.user-card-info {
+  display: flex;
+  
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.user-data{
+  text-align: left;
+  object-fit: cover;
+
 }
 
 
