@@ -21,7 +21,9 @@ export default function ProductDisplay(props: ProductDisplayProps) {
 
             {props.children}
 
-            {props.onAddToCart && (<button onClick={() => props.onAddToCart?.(props.product.id)}>
+            {props.onAddToCart && (<button 
+                                   className="button"
+                                   onClick={() => props.onAddToCart?.(props.product.id)}>
 
                 Add to Cart
             </button>

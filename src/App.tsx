@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import AlertBox from './components/AlertBox/AlertBox';
 import UserProfileCard from './components/UserProfileCard/UserProfileCard';
 import ProductDisplay from './components/ProductDisplay/ProductDisplay';
@@ -23,52 +25,99 @@ export default function App() {
    
     inStock: true
   };
+//  This state controls whether the alert appears or not.
+// success  Alert when add item to cart
+  const [showAlert, setShowAlert] = useState(false);
+  const [cartItems, setCartItems] = useState<string[]>([]);
 
-  return (
+// Info Alert when Edit user profile
+  const [showInfoAlert, setShowInfoAlert] = useState(false);
+  const [editedUserId, setEditedUserId] = useState("");
+
+ 
+// handleAddToCart function: adds a product to the cart and shows a confirmation alert.
+  const handleAddToCart = (productId: string) => {
+    setCartItems([...cartItems, productId]);
+    setShowAlert(true);
+
+    console.log("cartItems ===>:", cartItems);
+    console.log("add product ===>:", productId);
+  };
+
+  // When handleEdit is run, the user's ID will be shown in the console and the alert will be triggered.
+  const handleEdit = (userId: string) => {
+  console.log("Editing user profile:", userId);
+  setShowInfoAlert(true);
+};
+
+ 
+   return (
 
     <div>
       <h1> Alerts:</h1>
-      <AlertBox type="success"
+      {/* <AlertBox type="success"
         message="Your profile has been updated successfully!"
         onClose={() => alert("Alert closed")} >
         <p className="text-sm">You can now continue using the application.</p>
-      </AlertBox>
+      </AlertBox> */}
+
+      <div className="p-4">
+      
+      <p>Items add cart: {cartItems.length}</p>  
+      {showAlert && (
+        <AlertBox
+          type="success"
+          message="Product added to cart!"
+          onClose={() => setShowAlert(false)}
+        />
+      )}
+
+      {showInfoAlert && (
+        <AlertBox
+          type="info"
+          message={`Welcome to your profile! ${editedUserId}`}
+          onClose={() => setShowInfoAlert(false)}
+        />
+      )}
 
       <AlertBox type="warning" message="Warning alert!" />
       <AlertBox type="error" message="Error alert!" />
-      <AlertBox type="info" message="Info alert!" />
+      {/* <AlertBox type="info" message="Info alert!" /> */}
 
       <h2> User Profile </h2>
       <UserProfileCard user={user1}
         showEmail={true}
         showRole={true}
-        onEdit={(userId) => alert(`Editing user ${userId}`)}
+        // onEdit={(userId) => alert(`Editing user ${userId}`)}
+        onEdit={(userId) => {
+        setEditedUserId(userId);
+        setShowInfoAlert(true);
+      }}
 
       >
         <div className="text-sm text-gray-500">
           Last login: 2 hours ago
         </div>
-        <p>Welcome to your profile!</p>
+        {/* <p>Welcome to your profile!</p> */}
       </UserProfileCard>
 
 
       <ProductDisplay
+      
         product={product}
         showDescription={true}
         showStockStatus={true}
-        onAddToCart={(productId) =>
-          alert(`Added product ${productId} to cart`)
-        }
+        // onAddToCart={(productId) =>
+        //   alert(`Added product ${productId} to cart`)
+        // }
+        onAddToCart={handleAddToCart} 
       >
         <div className="text-sm text-gray-500">
           Free shipping available
         </div>
-
-        <div className="text-sm text-gray-500">
-          Last login: 2 hours ago
-        </div>
+       
       </ProductDisplay>
-
+ </div>
     </div>
 
   );

@@ -27,7 +27,7 @@ export default function UserProfileCard(props: UserProfileCardProps) {
                 {/* Edit button and add className="edit-button" */}
                 {props.onEdit && (
                     <button
-                        className="edit-button"
+                        className="button"
                         onClick={() => props.onEdit?.(props.user.id)}
                     >
                         Edit Profile

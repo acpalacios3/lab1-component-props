@@ -22,7 +22,7 @@ margin-bottom:  12px; ;
   color: #0c5460;
 }   
 
-.edit-button {
+.button {
   background-color: #2563eb;
   color: white;
   border: none;
@@ -44,7 +44,6 @@ margin-bottom:  12px; ;
   object-fit: cover;
 
 }
-
 
 img {
   width: 300px;
