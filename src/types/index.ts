@@ -36,6 +36,7 @@ export interface Product {
   description: string;
   imageUrl?: string;
   inStock: boolean;
+
 }
  
 export interface ProductDisplayProps {

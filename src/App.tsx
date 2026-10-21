@@ -34,11 +34,26 @@ export default function App() {
   const [showInfoAlert, setShowInfoAlert] = useState(false);
   const [editedUserId, setEditedUserId] = useState("");
 
+
+// Error Alert 
+const [showErrorAlert, setShowErrorAlert] = useState(false);
+const stock = 10;
+
  
 // handleAddToCart function: adds a product to the cart and shows a confirmation alert.
   const handleAddToCart = (productId: string) => {
-    setCartItems([...cartItems, productId]);
-    setShowAlert(true);
+      // Check the cart limit before adding the product
+        if (!product.inStock || cartItems.length >= stock) {
+          setShowAlert(false);
+          setShowErrorAlert(true);
+          return;
+        }
+
+      // add item to the cart
+      setCartItems([...cartItems, productId]);
+      // show sucess alert
+      setShowAlert(true);
+      setShowErrorAlert(false);
 
     console.log("cartItems ===>:", cartItems);
     console.log("add product ===>:", productId);
@@ -54,7 +69,7 @@ export default function App() {
    return (
 
     <div>
-      <h1> Alerts:</h1>
+      {/* <h1> Alerts:</h1> */}
       {/* <AlertBox type="success"
         message="Your profile has been updated successfully!"
         onClose={() => alert("Alert closed")} >
@@ -63,7 +78,7 @@ export default function App() {
 
       <div className="p-4">
       
-      <p>Items add cart: {cartItems.length}</p>  
+    
       {showAlert && (
         <AlertBox
           type="success"
@@ -80,9 +95,17 @@ export default function App() {
         />
       )}
 
-      <AlertBox type="warning" message="Warning alert!" />
-      <AlertBox type="error" message="Error alert!" />
+      <AlertBox type="warning" message="Last login: 2 hours ago!" />
+      {/* <AlertBox type="error" message="Error alert!" /> */}
       {/* <AlertBox type="info" message="Info alert!" /> */}
+
+      {showErrorAlert && (
+  <AlertBox
+    type="error"
+    message={`Error: You cannot add more than ${stock} items to the cart`}
+    onClose={() => setShowErrorAlert(false)}
+  />
+)}
 
       <h2> User Profile </h2>
       <UserProfileCard user={user1}
@@ -95,9 +118,9 @@ export default function App() {
       }}
 
       >
-        <div className="text-sm text-gray-500">
+        {/* <div className="text-sm text-gray-500">
           Last login: 2 hours ago
-        </div>
+        </div> */}
         {/* <p>Welcome to your profile!</p> */}
       </UserProfileCard>
 
@@ -113,8 +136,12 @@ export default function App() {
         onAddToCart={handleAddToCart} 
       >
         <div className="text-sm text-gray-500">
-          Free shipping available
+            {showErrorAlert
+              ? "Free shipping not available"
+              : "Free shipping available"
+            }
         </div>
+        <p>Items add cart: {cartItems.length}</p>  
        
       </ProductDisplay>
  </div>

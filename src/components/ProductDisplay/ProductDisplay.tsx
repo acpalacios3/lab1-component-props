@@ -18,7 +18,7 @@ export default function ProductDisplay(props: ProductDisplayProps) {
 
             {props.showStockStatus && (<p>{props.product.inStock}</p>)
             }
-
+          
             {props.children}
 
             {props.onAddToCart && (<button 
