@@ -31,5 +31,4 @@ export default function ProductDisplay(props: ProductDisplayProps) {
         </div>
 
     );
-
 }

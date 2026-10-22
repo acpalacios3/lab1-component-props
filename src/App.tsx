@@ -66,11 +66,16 @@ export default function App() {
     console.log("add product ===>:", productId);
   };
 
-  // Edit user profile and Info Alert
+  //  ******************************************
+  // Edit user profile and display Info Alert
+  // ********************************************
   const handleEdit = (userId: string) => {
     // console.log("User Id:", userId);
+
     setEditedUserId(userId);
+    // Displays the parent's Info alert when the function is called in onEdit
     setShowInfoAlert(true);
+    //change the value that the parent passes to the child through showEmail and showRole.
     setShowInfoUser(true);
   };
 
@@ -78,21 +83,18 @@ export default function App() {
 
     <div className="container">
 
-
       {/* ================= */}
       {/* user section */}
       {/* ================= */}
 
       <section>
 
-        <h2>
-          User Profile
-        </h2>
+        <h2> User Profile </h2>
 
         <UserProfileCard
           user={user1}
-          showEmail={showInfoUser} /*true*/
-          showRole={showInfoUser} /*true*/
+          showEmail={showInfoUser}
+          showRole={showInfoUser}
           onEdit={handleEdit}
         />
 
@@ -120,23 +122,20 @@ export default function App() {
       {/* ================= */}
 
       <section>
-        <h2>
-          Product
-        </h2>
+        <h2> Product </h2>
         <ProductDisplay
-
           product={product}
           showDescription={true}
           showStockStatus={true}
           onAddToCart={handleAddToCart}
         >
           <div className="product-stock">
+            {/* use the ternary operator (? :) */}
             {showErrorAlert
               ? "Out of stock"
               : "In stock"
             }
           </div>
-
 
           <p className="cart-info">
             add cart: {cartItems.length}
@@ -144,8 +143,7 @@ export default function App() {
 
         </ProductDisplay>
 
-        {/* Successfully when product add*/}
-
+        {/* Successfully alert when product add*/}
         {showAlert && (
           <div>
             <AlertBox
@@ -155,7 +153,6 @@ export default function App() {
             />
           </div>
         )}
-
 
         {/* Error Alert when limit stock cart*/}
         {showErrorAlert && (
@@ -167,8 +164,6 @@ export default function App() {
             />
           </div>
         )}
-
-
       </section>
     </div>
 
