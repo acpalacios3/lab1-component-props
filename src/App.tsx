@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import AlertBox from './components/AlertBox/AlertBox';
 import UserProfileCard from './components/UserProfileCard/UserProfileCard';
 import ProductDisplay from './components/ProductDisplay/ProductDisplay';
@@ -14,137 +13,163 @@ const user1 = {
 
 };
 
+const product = {
+  id: '1',
+  name: 'Wireless Headphones',
+  price: 199.99,
+  description: 'High-quality wireless headphones with noise cancellation.',
+  imageUrl: 'https://as1.ftcdn.net/jpg/00/44/36/76/1000_F_44367633_ef7Li8XTt3HDSJ3d2WEooPf3UAhvpKXK.jpg',
+
+  inStock: true
+};
+
 export default function App() {
 
-  const product = {
-    id: '1',
-    name: 'Wireless Headphones',
-    price: 199.99,
-    description: 'High-quality wireless headphones with noise cancellation.',
-    imageUrl: 'https://as1.ftcdn.net/jpg/00/44/36/76/1000_F_44367633_ef7Li8XTt3HDSJ3d2WEooPf3UAhvpKXK.jpg',
-   
-    inStock: true
-  };
-//  This state controls whether the alert appears or not.
-// success  Alert when add item to cart
+  //================================
+  // STATE ALERTS 
+  //=================================
+  // Success  Alert when add item to cart
   const [showAlert, setShowAlert] = useState(false);
   const [cartItems, setCartItems] = useState<string[]>([]);
 
-// Info Alert when Edit user profile
+  // Info Alert when Edit user profile and show email and role
   const [showInfoAlert, setShowInfoAlert] = useState(false);
   const [editedUserId, setEditedUserId] = useState("");
+  const [showInfoUser, setShowInfoUser] = useState(false);
 
 
-// Error Alert 
-const [showErrorAlert, setShowErrorAlert] = useState(false);
-const stock = 10;
+  // Error Alert 
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const stock = 10;
 
- 
-// handleAddToCart function: adds a product to the cart and shows a confirmation alert.
+  //=========================================
+  //handle alerts under certain conditions
+  // =======================================
+
+  // handleAddToCart function: adds a product to the cart and shows a confirmation alert.
   const handleAddToCart = (productId: string) => {
-      // Check the cart limit before adding the product
-        if (!product.inStock || cartItems.length >= stock) {
-          setShowAlert(false);
-          setShowErrorAlert(true);
-          return;
-        }
+    // Check the stock limit before adding the product to the cart
+    if (!product.inStock || cartItems.length >= stock) {
+      setShowAlert(false);
+      setShowErrorAlert(true);
+      return;
+    }
 
-      // add item to the cart
-      setCartItems([...cartItems, productId]);
-      // show sucess alert
-      setShowAlert(true);
-      setShowErrorAlert(false);
+    // add product to the cart
+    setCartItems([...cartItems, productId]);
+
+    // show sucess alert
+    setShowAlert(true);
+    setShowErrorAlert(false);
 
     console.log("cartItems ===>:", cartItems);
     console.log("add product ===>:", productId);
   };
 
-  // When handleEdit is run, the user's ID will be shown in the console and the alert will be triggered.
+  // Edit user profile and Info Alert
   const handleEdit = (userId: string) => {
-  console.log("Editing user profile:", userId);
-  setShowInfoAlert(true);
-};
+    // console.log("User Id:", userId);
+    setEditedUserId(userId);
+    setShowInfoAlert(true);
+    setShowInfoUser(true);
+  };
 
- 
-   return (
+  return (
 
-    <div>
-      {/* <h1> Alerts:</h1> */}
-      {/* <AlertBox type="success"
-        message="Your profile has been updated successfully!"
-        onClose={() => alert("Alert closed")} >
-        <p className="text-sm">You can now continue using the application.</p>
-      </AlertBox> */}
+    <div className="container">
 
-      <div className="p-4">
-      
-    
-      {showAlert && (
-        <AlertBox
-          type="success"
-          message="Product added to cart!"
-          onClose={() => setShowAlert(false)}
+
+      {/* ================= */}
+      {/* user section */}
+      {/* ================= */}
+
+      <section>
+
+        <h2>
+          User Profile
+        </h2>
+
+        <UserProfileCard
+          user={user1}
+          showEmail={showInfoUser} /*true*/
+          showRole={showInfoUser} /*true*/
+          onEdit={handleEdit}
         />
-      )}
 
-      {showInfoAlert && (
-        <AlertBox
-          type="info"
-          message={`Welcome to your profile! ${editedUserId}`}
-          onClose={() => setShowInfoAlert(false)}
-        />
-      )}
+        {/* Information user profile and Info Alert */}
 
-      <AlertBox type="warning" message="Last login: 2 hours ago!" />
-      {/* <AlertBox type="error" message="Error alert!" /> */}
-      {/* <AlertBox type="info" message="Info alert!" /> */}
+        {showInfoAlert && (
+          <div className='alert-container'>
+            <AlertBox
+              type="info"
+              message={`Welcome to your profile, editing user ! ${editedUserId}`}
+              onClose={() => setShowInfoAlert(false)}
+            />
+          </div>
+        )}
 
-      {showErrorAlert && (
-  <AlertBox
-    type="error"
-    message={`Error: You cannot add more than ${stock} items to the cart`}
-    onClose={() => setShowErrorAlert(false)}
-  />
-)}
-
-      <h2> User Profile </h2>
-      <UserProfileCard user={user1}
-        showEmail={true}
-        showRole={true}
-        // onEdit={(userId) => alert(`Editing user ${userId}`)}
-        onEdit={(userId) => {
-        setEditedUserId(userId);
-        setShowInfoAlert(true);
-      }}
-
-      >
-        {/* <div className="text-sm text-gray-500">
-          Last login: 2 hours ago
-        </div> */}
-        {/* <p>Welcome to your profile!</p> */}
-      </UserProfileCard>
-
-
-      <ProductDisplay
-      
-        product={product}
-        showDescription={true}
-        showStockStatus={true}
-        // onAddToCart={(productId) =>
-        //   alert(`Added product ${productId} to cart`)
-        // }
-        onAddToCart={handleAddToCart} 
-      >
-        <div className="text-sm text-gray-500">
-            {showErrorAlert
-              ? "Free shipping not available"
-              : "Free shipping available"
-            }
+        {/* Last login information and warning Alert*/}
+        <div>
+          <AlertBox type="warning" message="Last login: 2 hours ago!" />
         </div>
-        <p>Items add cart: {cartItems.length}</p>  
-       
-      </ProductDisplay>
- </div>
+      </section>
+
+
+      {/* ================= */}
+      {/* product section */}
+      {/* ================= */}
+
+      <section>
+        <h2>
+          Product
+        </h2>
+        <ProductDisplay
+
+          product={product}
+          showDescription={true}
+          showStockStatus={true}
+          onAddToCart={handleAddToCart}
+        >
+          <div className="product-stock">
+            {showErrorAlert
+              ? "Out of stock"
+              : "In stock"
+            }
+          </div>
+
+
+          <p className="cart-info">
+            add cart: {cartItems.length}
+          </p>
+
+        </ProductDisplay>
+
+        {/* Successfully when product add*/}
+
+        {showAlert && (
+          <div>
+            <AlertBox
+              type="success"
+              message="Product added to cart!"
+              onClose={() => setShowAlert(false)}
+            />
+          </div>
+        )}
+
+
+        {/* Error Alert when limit stock cart*/}
+        {showErrorAlert && (
+          <div>
+            <AlertBox
+              type="error"
+              message={`Error: You cannot add more than ${stock} items to the cart`}
+              onClose={() => setShowErrorAlert(false)}
+            />
+          </div>
+        )}
+
+
+      </section>
     </div>
 
   );

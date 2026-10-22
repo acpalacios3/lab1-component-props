@@ -11,19 +11,19 @@ export default function ProductDisplay(props: ProductDisplayProps) {
                 />
             )}
             <h2>{props.product.name}</h2>
-            <p>{props.product.price.toFixed(2)}</p>
+            <p className="price-product">{props.product.price.toFixed(2)}</p>
 
-            {props.showDescription && (<p>{props.product.description}</p>)
+            {props.showDescription && (<p className="description-product">{props.product.description}</p>)
             }
 
             {props.showStockStatus && (<p>{props.product.inStock}</p>)
             }
-          
+
             {props.children}
 
-            {props.onAddToCart && (<button 
-                                   className="button"
-                                   onClick={() => props.onAddToCart?.(props.product.id)}>
+            {props.onAddToCart && (<button
+                className="button"
+                onClick={() => props.onAddToCart?.(props.product.id)}>
 
                 Add to Cart
             </button>

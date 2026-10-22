@@ -6,14 +6,13 @@ export default function UserProfileCard(props: UserProfileCardProps) {
 
             <img
                 src={props.user.avatarUrl}
-                alt={props.user.name} 
+                alt={props.user.name}
                 className="avatar"
-                />
+            />
 
             <div className="user-data">
                 <h2> {props.user.name}</h2>
 
-                {/* show the email or role without modifying UserProfileCard.tsx. */}
                 {props.showEmail && (
                     <p>Email: {props.user.email}</p>
                 )}
