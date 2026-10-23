@@ -6,13 +6,13 @@
 
 ## Technologies Used
 
-`React:` To build reusable UI components.
-`TypeScript:` To add type safety and define component props.
-`JavaScript:` To implement application logic and event handling.
-`React Hooks (useState):` To manage component state and control alert visibility.
-`JSX/TSX:` To structure the UI and render dynamic content.
-`CSS:` To style the components and application layout.
-`Vite:` To run the development server and build the application.
+1. `React:` To build reusable UI components.
+2. `TypeScript:` To add type safety and define component props.
+3. `JavaScript:` To implement application logic and event handling.
+4. `React Hooks (useState):` To manage component state and control alert visibility.
+5. `JSX/TSX:` To structure the UI and render dynamic content.
+6. `CSS:` To style the components and application layout.
+7. `Vite:` To run the development server and build the application.
 
 ## How to Run the Application
 
@@ -66,10 +66,7 @@ I also learned how child components can send information back to the parent comp
 
 ## Notes:
 
-* I used the useState Hook in the parent component to control the display of alerts based on user interactions. It was used to control the visibility of alert messages in the React application.
-
-When the user clicks a button, the state changes and displays the appropriate alert component.
-The alert can be closed by updating the state, allowing React to hide it automatically.
+* I used the useState Hook in the parent component to control the display of alerts based on user interactions. It was used to control the visibility of alert messages in the React application. When the user clicks a button, the state changes and displays the appropriate alert component.The alert can be closed by updating the state, allowing React to hide it automatically.
 
 * I defined cartItems and setCartItems using const [cartItems, setCartItems] = useState<string[]>([]). The cartItems variable stores the product IDs in an array, setCartItems updates the state, and useState<string[]>([]) initializes an empty array of strings. When a user adds a product, I used setCartItems([...cartItems, productId]) with the spread operator (...) to preserve existing items and append the new product ID. React then automatically updates the interface when the state changes.
 
