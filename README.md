@@ -72,7 +72,42 @@ I also learned how child components can send information back to the parent comp
 
 * A global variable was defined to control the product stock limit. When the number of items in the shopping cart exceeds the allowed limit, a React error alert appears, informing the user that no more products can be added to the cart.
 
-* The ternary operator (? :) was used to display "In stock" or "Out of stock" depending on product availability. 
+* I used the children prop to pass additional content from the parent component (App.tsx) to ProductDisplay. This content includes a stock status message that uses a ternary operator (? :) to display “In stock” or “Out of stock”, and a paragraph that shows the number of items in the cart using cartItems.length. Inside ProductDisplay, I used props.children to render this content. This approach makes the component more flexible and allows the parent component to customize the content displayed inside it.Therefore, props.children does not create content by itself. It receives the content that the parent component places inside the component, and the child component decides where to display it using {props.children}.
+
+`Example:`
+
+a)
+interface ProductDisplayProps {
+  product: Product;
+  showDescription?: boolean;
+  showStockStatus?: boolean;
+  onAddToCart: () => void;
+  children?: React.ReactNode;
+}
+
+b) 
+
+{/* Content passed to the child component */}
+<div className="product-stock">
+  {showErrorAlert ? "Out of stock" : "In stock" }
+</div>
+
+<p className="cart-info">
+    add cart: {cartItems.length}
+</p>
+
+
+c)
+
+return (
+  <div>
+    {/* ProductDisplay-specific content */}
+    <h2>{props.product.name}</h2>
+
+    {/* Content received from the parent */}
+    {props.children}
+  </div>
+);
 
 * Using Logical AND (&&) – Short-Circuiting: The logical AND operator (&&) was used to conditionally display alerts, for example on the shopping cart's stock limit. When the condition is true, the error alert is displayed; otherwise, it remains hidden.
 

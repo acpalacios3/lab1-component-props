@@ -1,7 +1,7 @@
 ## Reflection Questions:
 
 1. How did you handle optional props in your components?
-I used optional props to make my components more flexible. For example, onAddToCart is optional, so the button only appears when the callback function is provided.
+I handled optional props by using the ? symbol in my TypeScript interfaces. For example, I made showEmail, showRole, showDescription, showStockStatus, and callback functions such as onEdit and onAddToCart optional. I also used the optional children prop to allow custom content inside my components. This approach made my components more flexible and reusable, allowing them to work with or without certain props.
 
 2. What considerations did you make when designing the component interfaces?
 I used TypeScript interfaces to define the props and data types required by each component. I focused on making my components clear, easy to maintain, and reusable.
